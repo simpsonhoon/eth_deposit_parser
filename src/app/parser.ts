@@ -7,10 +7,6 @@ function hexToBigInt(hex: string | undefined | null): bigint {
   return BigInt(hex);
 }
 
-function normalizeAddress(addr: string): string {
-  return addr.toLowerCase();
-}
-
 export function parseDirectEth(
   tx: RpcTransaction,
   receipt: RpcReceipt,
@@ -19,7 +15,7 @@ export function parseDirectEth(
   const result: ParsedDepositResult[] = [];
   const directValue = hexToBigInt(tx.value);
 
-  if (tx.to && normalizeAddress(tx.to) === target && directValue > 0n) {
+  if (tx.to && tx.to.toLowerCase() === target && directValue > 0n) {
     result.push({
       chain: 'ethereum',
       assetType: 'native',
@@ -27,7 +23,7 @@ export function parseDirectEth(
       symbol: 'ETH',
       txHash: tx.hash,
       targetAddress: target,
-      from: normalizeAddress(tx.from),
+      from: tx.from.toLowerCase(),
       to: target,
       amount: formatUnits(directValue, 18),
       rawAmount: directValue.toString(),
@@ -54,16 +50,18 @@ export function parseInternalEth(
   const blockNumber = parseInt(receipt.blockNumber, 16);
   const transactionIndex = parseInt(receipt.transactionIndex, 16);
 
-  // calls 배열을 재귀적으로 순회하며 target으로 들어오는 CALL 프레임을 수집합니다.
-  // - CALL / CALLCODE 타입만 실제로 ETH를 전송합니다.
-  // - 루트 프레임(isRoot=true)은 tx 자체이므로 direct로 처리되며, 여기서는 건너뜁니다.
-  // - frame.error가 있으면 해당 콜은 revert된 것이므로 입금으로 처리하지 않습니다.
-  function walk(frame: CallFrame, traceAddress: number[], isRoot: boolean): void {
-    const to = frame.to ? normalizeAddress(frame.to) : null;
+  // calls 배열을 재귀적으로 순회하며 target으로 들어오는 CALL 프레임을 수집
+  // frame.error가 있으면 해당 콜은 revert된 것이므로 입금으로 처리하지 않습니다.
+  function collectInternalDeposits(frame: CallFrame, traceAddress: number[], isRoot: boolean): void {
+    const to = frame.to?.toLowerCase() ?? null;
     const value = hexToBigInt(frame.value);
-    const isEthCall = frame.type === 'CALL' || frame.type === 'CALLCODE';
 
-    if (!isRoot && isEthCall && to === target && value > 0n && !frame.error) {
+    // CALL / CALLCODE 만 실제로 ETH를 전송
+    // DELEGATECALL·STATICCALL은 value 개념이 없고,
+    // CREATE·CREATE2는 새 컨트랙트 주소로만 ETH가 전달되므로 제외
+    const isEthTransferCall = frame.type === 'CALL' || frame.type === 'CALLCODE';
+
+    if (!isRoot && isEthTransferCall && to === target && value > 0n && !frame.error) {
       result.push({
         chain: 'ethereum',
         assetType: 'native',
@@ -71,7 +69,7 @@ export function parseInternalEth(
         symbol: 'ETH',
         txHash,
         targetAddress: target,
-        from: normalizeAddress(frame.from),
+        from: frame.from.toLowerCase(),
         to,
         amount: formatUnits(value, 18),
         rawAmount: value.toString(),
@@ -83,10 +81,12 @@ export function parseInternalEth(
       });
     }
 
-    frame.calls?.forEach((child, idx) => walk(child, [...traceAddress, idx], false));
+    frame.calls?.forEach((child, idx) =>
+      collectInternalDeposits(child, [...traceAddress, idx], false),
+    );
   }
 
-  walk(callTrace, [], true);
+  collectInternalDeposits(callTrace, [], true);
   return result;
 }
 
@@ -101,7 +101,7 @@ export function parseErc20Deposits(
   const txSuccess = receipt.status === '0x1';
 
   for (const log of receipt.logs) {
-    const contractAddr = normalizeAddress(log.address);
+    const contractAddr = log.address.toLowerCase();
 
     if (!SUPPORTED_TOKENS.has(contractAddr)) continue;
     if (log.topics[0]?.toLowerCase() !== ERC20_TRANSFER_TOPIC) continue;
@@ -109,10 +109,10 @@ export function parseErc20Deposits(
 
     // Transfer(address indexed from, address indexed to, uint256 value)
     // topic[1] = from (32-byte padded), topic[2] = to (32-byte padded)
-    const logTo = normalizeAddress('0x' + log.topics[2].slice(-40));
+    const logTo = ('0x' + log.topics[2].slice(-40)).toLowerCase();
     if (logTo !== target) continue;
 
-    const logFrom = normalizeAddress('0x' + log.topics[1].slice(-40));
+    const logFrom = ('0x' + log.topics[1].slice(-40)).toLowerCase();
     const rawAmount = hexToBigInt(log.data);
     const decimals = TOKEN_DECIMALS[contractAddr];
     const symbol = TOKEN_SYMBOL[contractAddr];
