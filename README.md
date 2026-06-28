@@ -58,6 +58,8 @@ curl -s "http://localhost:3000/deposit?txHash=0x87442d1808fa57d798f9e8e55b1e4cd0
 curl -s "http://localhost:3000/deposit?txHash=0x66048ce8edf3dac2d1dc08dc1244d449d040d84e3487ecf7342ccb81eab6a060&targetAddress=0x6f765557f07501ae8e4d8aa4836dc0715b2411bf" | jq
 # test case 4
 curl -s "http://localhost:3000/deposit?txHash=0xd49756bda279532a7acd83c340266e497ed87f297c994a4ff2994e7b996c8436&targetAddress=0x55C61Ebe13b9151E3FCD73943C74c5eC1D7DA7bA" | jq
+# direct eth + internal eth + usdc 모두 입금받은 case
+curl -s "http://localhost:3000/deposit?txHash=0x8dec64ee3ca6c5d074ccf80dcda6528f1ad951612ad9207098e0989644903475&targetAddress=0x06cff7088619c7178f5e14f0b119458d08d2f5ef" | jq
 ```
 
 ### 테스트 결과
@@ -73,6 +75,7 @@ curl -s "http://localhost:3000/deposit?txHash=0xd49756bda279532a7acd83c340266e49
 - test case 4
 
 ![img_3.png](img_3.png)
+
 
 
 ### 에러 케이스

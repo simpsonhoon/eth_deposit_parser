@@ -1,0 +1,215 @@
+{
+  "case1": {
+    "txHash": "0xfadb892f50e0675b40178b601da31035936b3117c6d7077902507684d7cb7ec8",
+    "targetAddress": "0xecE1D520608a2d5b69Cc929274b777d122578243",
+    "count": 1,
+    "deposits": [
+      {
+        "chain": "ethereum",
+        "assetType": "native",
+        "transferType": "internal",
+        "symbol": "ETH",
+        "txHash": "0xfadb892f50e0675b40178b601da31035936b3117c6d7077902507684d7cb7ec8",
+        "targetAddress": "0xece1d520608a2d5b69cc929274b777d122578243",
+        "from": "0xe5ab4114e4cb00abea3fae5e32d71aa3b93a9c6f",
+        "to": "0xece1d520608a2d5b69cc929274b777d122578243",
+        "amount": "0.02530372797273203",
+        "rawAmount": "25303727972732030",
+        "decimals": 18,
+        "blockNumber": 24643265,
+        "transactionIndex": 133,
+        "traceAddress": [
+          2,
+          0,
+          1,
+          0
+        ],
+        "success": true
+      }
+    ]
+  },
+  "case2": {
+    "txHash": "0x87442d1808fa57d798f9e8e55b1e4cd046245da87b39e6c5efe46f4a3074e262",
+    "targetAddress": "0x22c2bF13F49661617bDb0489A665FbAFE52752C4",
+    "count": 1,
+    "deposits": [
+      {
+        "chain": "ethereum",
+        "assetType": "erc20",
+        "transferType": "event",
+        "symbol": "USDC",
+        "tokenContract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "txHash": "0x87442d1808fa57d798f9e8e55b1e4cd046245da87b39e6c5efe46f4a3074e262",
+        "targetAddress": "0x22c2bf13f49661617bdb0489a665fbafe52752c4",
+        "from": "0xb23360ccdd9ed1b15d45e5d3824bb409c8d7c460",
+        "to": "0x22c2bf13f49661617bdb0489a665fbafe52752c4",
+        "amount": "104.0",
+        "rawAmount": "104000000",
+        "decimals": 6,
+        "blockNumber": 25224258,
+        "transactionIndex": 992,
+        "logIndex": 371,
+        "success": true
+      }
+    ]
+  },
+  "case3": {
+    "txHash": "0x66048ce8edf3dac2d1dc08dc1244d449d040d84e3487ecf7342ccb81eab6a060",
+    "targetAddress": "0x6f765557f07501ae8e4d8aa4836dc0715b2411bf",
+    "count": 1,
+    "deposits": [
+      {
+        "chain": "ethereum",
+        "assetType": "native",
+        "transferType": "internal",
+        "symbol": "ETH",
+        "txHash": "0x66048ce8edf3dac2d1dc08dc1244d449d040d84e3487ecf7342ccb81eab6a060",
+        "targetAddress": "0x6f765557f07501ae8e4d8aa4836dc0715b2411bf",
+        "from": "0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43",
+        "to": "0x6f765557f07501ae8e4d8aa4836dc0715b2411bf",
+        "amount": "0.1225131",
+        "rawAmount": "122513100000000000",
+        "decimals": 18,
+        "blockNumber": 25286102,
+        "transactionIndex": 6,
+        "traceAddress": [
+          33
+        ],
+        "success": true
+      }
+    ]
+  },
+  "case4": {
+    "txHash": "0xd49756bda279532a7acd83c340266e497ed87f297c994a4ff2994e7b996c8436",
+    "targetAddress": "0x55C61Ebe13b9151E3FCD73943C74c5eC1D7DA7bA",
+    "count": 1,
+    "deposits": [
+      {
+        "chain": "ethereum",
+        "assetType": "native",
+        "transferType": "direct",
+        "symbol": "ETH",
+        "txHash": "0xd49756bda279532a7acd83c340266e497ed87f297c994a4ff2994e7b996c8436",
+        "targetAddress": "0x55c61ebe13b9151e3fcd73943c74c5ec1d7da7ba",
+        "from": "0x32143a02fb6484d18c79fa0401c9bf760dd3de68",
+        "to": "0x55c61ebe13b9151e3fcd73943c74c5ec1d7da7ba",
+        "amount": "0.04157295",
+        "rawAmount": "41572950000000000",
+        "decimals": 18,
+        "blockNumber": 25285945,
+        "transactionIndex": 295,
+        "traceAddress": [],
+        "success": true
+      }
+    ]
+  },
+  "case5_direct_internal_erc20": {
+    "txHash": "0x8dec64ee3ca6c5d074ccf80dcda6528f1ad951612ad9207098e0989644903475",
+    "targetAddress": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+    "count": 5,
+    "deposits": [
+      {
+        "chain": "ethereum",
+        "assetType": "native",
+        "transferType": "direct",
+        "symbol": "ETH",
+        "txHash": "0x8dec64ee3ca6c5d074ccf80dcda6528f1ad951612ad9207098e0989644903475",
+        "targetAddress": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "from": "0xf07b4d27cae6571857e51ab3fb209f5226de2d88",
+        "to": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "amount": "0.000000000000000999",
+        "rawAmount": "999",
+        "decimals": 18,
+        "blockNumber": 25416034,
+        "transactionIndex": 106,
+        "traceAddress": [],
+        "success": true
+      },
+      {
+        "chain": "ethereum",
+        "assetType": "native",
+        "transferType": "internal",
+        "symbol": "ETH",
+        "txHash": "0x8dec64ee3ca6c5d074ccf80dcda6528f1ad951612ad9207098e0989644903475",
+        "targetAddress": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "from": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "to": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "amount": "0.02",
+        "rawAmount": "20000000000000000",
+        "decimals": 18,
+        "blockNumber": 25416034,
+        "transactionIndex": 106,
+        "traceAddress": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "success": true
+      },
+      {
+        "chain": "ethereum",
+        "assetType": "native",
+        "transferType": "internal",
+        "symbol": "ETH",
+        "txHash": "0x8dec64ee3ca6c5d074ccf80dcda6528f1ad951612ad9207098e0989644903475",
+        "targetAddress": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "from": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "to": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "amount": "0.000452577672139537",
+        "rawAmount": "452577672139537",
+        "decimals": 18,
+        "blockNumber": 25416034,
+        "transactionIndex": 106,
+        "traceAddress": [
+          0,
+          1,
+          0,
+          3,
+          0
+        ],
+        "success": true
+      },
+      {
+        "chain": "ethereum",
+        "assetType": "erc20",
+        "transferType": "event",
+        "symbol": "USDT",
+        "tokenContract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "txHash": "0x8dec64ee3ca6c5d074ccf80dcda6528f1ad951612ad9207098e0989644903475",
+        "targetAddress": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "from": "0xd51a44d3fae010294c616388b506acda1bfaae46",
+        "to": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "amount": "1454.774466",
+        "rawAmount": "1454774466",
+        "decimals": 6,
+        "blockNumber": 25416034,
+        "transactionIndex": 106,
+        "logIndex": 379,
+        "success": true
+      },
+      {
+        "chain": "ethereum",
+        "assetType": "erc20",
+        "transferType": "event",
+        "symbol": "USDC",
+        "tokenContract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "txHash": "0x8dec64ee3ca6c5d074ccf80dcda6528f1ad951612ad9207098e0989644903475",
+        "targetAddress": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "from": "0x000000000004444c5dc75cb358380d2e3de08a90",
+        "to": "0x06cff7088619c7178f5e14f0b119458d08d2f5ef",
+        "amount": "1453.201313",
+        "rawAmount": "1453201313",
+        "decimals": 6,
+        "blockNumber": 25416034,
+        "transactionIndex": 106,
+        "logIndex": 383,
+        "success": true
+      }
+    ]
+  }
+}
