@@ -19,10 +19,13 @@ export async function getTransaction(txHash: string): Promise<RpcTransaction> {
   return tx;
 }
 
-export async function getTransactionReceipt(txHash: string): Promise<RpcReceipt> {
-  const receipt = await provider.send('eth_getTransactionReceipt', [txHash]);
-  if (!receipt) throw new Error(`Receipt not found: ${txHash}`);
-  return receipt;
+export async function getTransactionReceipt(txHash: string, retries = 3, intervalMs = 1000): Promise<RpcReceipt> {
+  for (let i = 0; i < retries; i++) {
+    const receipt = await provider.send('eth_getTransactionReceipt', [txHash]);
+    if (receipt) return receipt;
+    if (i < retries - 1) await new Promise(r => setTimeout(r, intervalMs));
+  }
+  throw new Error(`Receipt not found after ${retries} retries: ${txHash}`);
 }
 
 

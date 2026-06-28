@@ -14,6 +14,8 @@ export async function parseEthereumDeposit(
     getCallTrace(txHash),
   ]);
 
+  if (receipt.status !== '0x1') return [];
+
   const directEth = parseDirectEth(tx, receipt, target);
   const internalEth = parseInternalEth(callTrace, receipt, txHash, target);
   const erc20 = parseErc20Deposits(receipt, txHash, target);

@@ -313,6 +313,39 @@ Internal ETH 입금은 `debug_traceTransaction`에 `callTracer` 옵션을 사용
 
 ---
 
+### 6. revert된 트랜잭션 입금 제외 — tx 레벨 성공 체크 추가
+
+**지적 내용**: `frame.error` 체크는 서브콜 레벨 revert만 잡는다. `receipt.status === '0x0'`인 경우(tx 전체 revert)는 EVM이 모든 상태 변화를 롤백하므로 ETH 이동·로그가 실제로 일어나지 않았는데, 파서 세 개 모두 이를 체크하지 않아 있지도 않은 입금을 결과에 포함할 수 있다.
+
+**결정**: 각 파서에 개별 가드를 추가하는 대신 `service.ts`에서 파서 호출 전 한 번만 체크.
+
+```typescript
+if (receipt.status !== '0x1') return [];
+```
+
+**이유**: tx 전체가 revert됐으면 internal이든 ERC-20이든 실제로 일어난 일이 없으므로, 파서 호출 자체를 막는 것이 논리적으로 맞고 중복 가드도 불필요.
+
+---
+
+### 7. `getTransactionReceipt` 재시도 로직 추가
+
+**배경**: 트랜잭션이 아직 채굴 중이거나 노드 동기화가 늦은 경우 receipt가 null로 올 수 있다. 기존 코드는 null이면 즉시 에러를 던졌다.
+
+**결정**: 1초 간격으로 최대 3회 재시도 후 그래도 없으면 에러 반환.
+
+```typescript
+for (let i = 0; i < retries; i++) {
+  const receipt = await provider.send('eth_getTransactionReceipt', [txHash]);
+  if (receipt) return receipt;
+  if (i < retries - 1) await new Promise(r => setTimeout(r, intervalMs));
+}
+throw new Error(`Receipt not found after ${retries} retries: ${txHash}`);
+```
+
+**트레이드오프**: 노드 응답 지연 시 API 응답이 최대 3초 늦어질 수 있으나, receipt를 못 가져와 에러를 반환하는 것보다 낫다.
+
+---
+
 ### AI 제안을 채택하지 않은 사례
 
 | AI 제안 | 최종 결정 | 이유 |
