@@ -64,6 +64,7 @@ curl -s "http://localhost:3000/deposit?txHash=0x8dec64ee3ca6c5d074ccf80dcda6528f
 
 ### 테스트 결과
 - test case 1
+<img width="685" height="529" alt="스크린샷 2026-06-27 오후 11 03 21" src="https://github.com/user-attachments/assets/606833fa-4a55-47ef-a62b-75b522f6be91" />
 
 ![img.png](img.png)
 - test case 2
