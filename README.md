@@ -67,15 +67,17 @@ curl -s "http://localhost:3000/deposit?txHash=0x8dec64ee3ca6c5d074ccf80dcda6528f
 
 <img width="685" height="529" alt="스크린샷 2026-06-27 오후 11 03 21" src="https://github.com/user-attachments/assets/606833fa-4a55-47ef-a62b-75b522f6be91" />
 
-
 - test case 2
 
+<img width="683" height="453" alt="스크린샷 2026-06-27 오후 11 03 57" src="https://github.com/user-attachments/assets/09902319-4761-478c-8fed-7a94f391513f" />
 
 - test case 3
 
+<img width="693" height="476" alt="스크린샷 2026-06-27 오후 11 04 30" src="https://github.com/user-attachments/assets/78d1fce9-1df6-48f1-955b-c177ff5e4cf2" />
 
 - test case 4
 
+<img width="692" height="432" alt="스크린샷 2026-06-27 오후 11 04 59" src="https://github.com/user-attachments/assets/f39ebb0b-2b07-4771-8919-1d1702210eed" />
 
 
 
